@@ -44,7 +44,7 @@ class Asr extends EventEmitter {
             // Ecoute des résultats de transcription (Data)
             this.responseStream.on('data', (chunk) => {
                 const transcript = chunk.toString();
-                logger.info('Received data from external asr service: ' + transcript);
+                logger.info(`[${uuid}] Received data from external asr service: ` + transcript);
                 this.emit('transcript', transcript);
             });
 
