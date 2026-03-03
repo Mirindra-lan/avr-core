@@ -1,0 +1,40 @@
+{
+  "name": "avr-core",
+  "version": "1.0.0",
+  "description": "Agent Voice Response",
+  "keywords": [
+    "avr",
+    "tts",
+    "vad",
+    "asr",
+    "IA",
+    "APIs"
+  ],
+  "homepage": "https://github.com/Mirindra-lan/avr-core#readme",
+  "bugs": {
+    "url": "https://github.com/Mirindra-lan/avr-core/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mirindra-lan/avr-core.git"
+  },
+  "license": "ISC",
+  "author": "Mirindra",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "dependencies": {
+    "alawmulaw": "^6.0.0",
+    "avr-vad": "^1.0.9",
+    "axios": "^1.13.6",
+    "dotenv": "^17.3.1",
+    "to-uuid": "^0.1.3",
+    "winston": "^3.19.0",
+    "ws": "^8.19.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
