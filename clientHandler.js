@@ -19,6 +19,7 @@ const TERMINATE_PACKET = 0x00;
 const UUID_PACKET = 0x01;
 const AUDIO_PACKET = 0x10;
 const ERROR_PACKET = 0xff;
+const USER_INFO_PACKET = 0x20;
 const TERMINATE_PACKET_LENGTH = 3;
 const MAX_CHUNK_SIZE = 320; // 0x140
 
@@ -109,6 +110,9 @@ class ClientHandler extends EventEmitter {
         case ERROR_PACKET:
             this.handleErrorPacket(data, length);
             break;
+        case USER_INFO_PACKET:
+            this.handleUserInfoPacket(data, length);
+            break;
         default:
             logger.error('Unknown packet type: ' + type);
             break;
@@ -181,6 +185,26 @@ class ClientHandler extends EventEmitter {
         } else {
             await this.vad.write(audioBuffer);
             this.asr.write(this.uuid, audioBuffer);
+        }
+    }
+
+    handleUserInfoPacket(data, length) {
+        let userInfo = data.slice(TERMINATE_PACKET_LENGTH, TERMINATE_PACKET_LENGTH + length).toString();
+        let userData;
+        try {
+            userData = JSON.parse(userInfo);
+        } catch (error) {
+            logger.error("The user data format error : " + error.message);
+        }
+        if(userData) {
+            let text;
+            text = userData.name ? `Je m'appelle ${userData.name}.` : "";
+            text += userData.poste ? ` Je suis ${userData.poste}` : "";
+            text += userData.site ? ` sur le site de ${userData.site}` : "";
+            if(text && text != "") {
+                this.handleTranscript(text)
+                this.handleLlmText(`Bonjour ${userData.name} !`);
+            }
         }
     }
 

@@ -85,7 +85,7 @@ class Llm extends EventEmitter {
     }
 
     /**
-     * Gère la réception de fragments de texte et découpe en phrases
+     * Gère la réception de fragments de texte et découpe  en 
      */
     handleText(text) {
         this.log('Handling text content: ' + text)
