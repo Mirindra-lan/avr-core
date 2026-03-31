@@ -202,7 +202,7 @@ class ClientHandler extends EventEmitter {
             text += userData.poste ? ` Je suis ${userData.poste}` : "";
             text += userData.site ? ` sur le site de ${userData.site}` : "";
             if(text && text != "") {
-                this.handleTranscript(text)
+                this.handleTranscript(text);
                 this.handleLlmText(`Bonjour ${userData.name} !`);
             }
         }
